@@ -1,24 +1,24 @@
 <template>
   <VbDemo>
     <VbCard title="Default">
-      <VaMessageList :modelValue="stringMessage" />
+      <VaMessageList :value="stringMessage" />
     </VbCard>
     <VbCard title="Message array">
       <VaMessageList
         :limit="3"
-        :modelValue="stringMessages"
+        :value="stringMessages"
       />
     </VbCard>
     <VbCard title="Error">
       <VaMessageList
         color="danger"
-        :modelValue="stringMessages"
+        :value="stringMessages"
       />
     </VbCard>
     <VbCard title="Success">
       <VaMessageList
         color="success"
-        :modelValue="stringMessages"
+        :value="stringMessages"
       />
     </VbCard>
   </VbDemo>

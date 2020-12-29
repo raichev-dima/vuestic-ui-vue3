@@ -8,25 +8,23 @@
 
     <VbCard title="Slots scheme">
       <va-input-wrapper :messages="messages">
-        <template #prepend>
-          <div
-            style="width: 30px; height: 30px; border: 1px dotted black;"
-            class="flex-center"
-          >
-            <va-icon name="volume_down" />
-          </div>
-        </template>
+        <div
+          slot="prepend"
+          style="width: 30px; height: 30px; border: 1px dotted black;"
+          class="flex-center"
+        >
+          <va-icon name="volume_down" />
+        </div>
         <div style="width: 200px; height: 30px; border: 1px dotted black;">
           Default Slot
         </div>
-        <template #append>
-          <div
-            style="width: 30px; height: 30px; border: 1px dotted black;"
-            class="flex-center"
-          >
-            <va-icon name="volume_up" />
-          </div>
-        </template>
+        <div
+          slot="append"
+          style="width: 30px; height: 30px; border: 1px dotted black;"
+          class="flex-center"
+        >
+          <va-icon name="volume_up" />
+        </div>
       </va-input-wrapper>
     </VbCard>
 
@@ -53,7 +51,7 @@
           name="agree-to-terms"
           v-model="agreedToTerms"
         >
-          <template #label>
+          <template slot="label">
             I agree to
             <a
               class="link"
@@ -75,10 +73,10 @@
 </template>
 
 <script>
-import VaInputWrapper from './VaInputWrapper'
-import VaIcon from './../va-icon/VaIcon'
-import VaCheckbox from '../va-checkbox/VaCheckbox'
-import VaRadio from '../va-radio/VaRadio'
+import VaInputWrapper from './index'
+import VaIcon from '../../va-icon'
+import VaCheckbox from '../../va-checkbox'
+import VaRadio from '../../va-radio'
 
 export default {
   components: {

@@ -4,7 +4,7 @@
       <div class="va-input-wrapper__slot">
         <div
           v-if="$slots.prepend"
-          @click="$emit('click-prepend')"
+          @click="$emit('click:prepend')"
           class="va-input-wrapper__prepend-inner"
         >
           <slot name="prepend" />
@@ -14,14 +14,14 @@
           <div class="va-input-wrapper__details py-0 px-2">
             <va-message-list
               :color="messagesColor"
-              :modelValue="messagesComputed"
+              :value="messagesComputed"
               :limit="errorLimit"
             />
           </div>
         </div>
         <div
           v-if="$slots.append"
-          @click="$emit('click-append')"
+          @click="$emit('click:append')"
           class="va-input-wrapper__append-inner"
         >
           <slot name="append" />
@@ -32,46 +32,38 @@
 </template>
 
 <script lang="ts">
-import { Mixins } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 
-import VaMessageList from './VaMessageList.vue'
+import VaMessageList from '../VaMessageList'
 
-import { makeContextablePropsMixin } from '../../context-test/context-provide/ContextPlugin'
-import { Options } from 'vue-class-component'
-
-const InputWrapperPropsMixin = makeContextablePropsMixin({
-  disabled: { type: Boolean, default: false },
-  error: { type: Boolean, default: false },
-  success: { type: Boolean, default: false },
-  messages: { type: Array, default: () => [] },
-  errorMessages: { type: Array, default: () => [] },
-  errorCount: { type: Number, default: 1 },
-})
-
-@Options({
+@Component({
   name: 'VaInputWrapper',
   components: { VaMessageList },
-  emits: ['click-append', 'click-prepend'],
 })
-export default class VaInputWrapper extends Mixins(
-  InputWrapperPropsMixin,
-) {
+export default class VaInputWrapper extends Vue {
+  @Prop({ type: Boolean, default: false }) disabled!: boolean
+  @Prop({ type: Boolean, default: false }) error!: boolean
+  @Prop({ type: Boolean, default: false }) success!: boolean
+  @Prop({ type: Array, default: () => [] }) messages!: any[]
+  @Prop({ type: Array, default: () => [] }) errorMessages!: any[]
+  @Prop({ type: Number, default: 1 }) errorCount!: number
+
   get messagesComputed () {
-    return this.c_error ? this.c_errorMessages : this.messages
+    return this.error ? this.errorMessages : this.messages
   }
 
   get messagesColor () {
-    return (this.c_error && 'danger') || (this.c_success && 'success') || ''
+    return (this.error && 'danger') || (this.success && 'success') || ''
   }
 
   get errorLimit () {
-    return this.c_error ? this.c_errorCount : 99
+    return this.error ? this.errorCount : 99
   }
 }
 </script>
 
 <style lang='scss'>
-@import '../../vuestic-sass/resources/resources';
+@import '../../../vuestic-sass/resources/resources';
 
 .va-input-wrapper {
   display: flex;

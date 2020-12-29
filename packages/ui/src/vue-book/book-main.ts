@@ -1,14 +1,7 @@
-// @ts-nocheck
 import { createApp } from 'vue'
 import App from './BookApp.vue'
-import { ContextPlugin, ContextPlugin } from '../components/context-test/context-provide/ContextPlugin'
 import { ColorThemePlugin } from '../services/ColorThemePlugin'
-import { getContext } from '../components/context-test/context-provide/context'
-
-import { BusPlugin } from 'vue-epic-bus'
-import { registerVuesticObject } from '../components/resize-events'
-import DropdownPopperSubplugin, { DropdownPopperPlugin } from '../components/vuestic-components/va-dropdown/dropdown-popover-subplugin'
-import { installPlatform } from '../components/vuestic-components/va-popup/install'
+import DropdownPopperSubplugin from '../components/vuestic-components/va-dropdown/dropdown-popover-subplugin'
 import ColorHelpersPlugin from '../components/vuestic-utilities/color-helpers-plugin'
 import ToastInstall from '../components/vuestic-components/va-toast/install'
 
@@ -41,7 +34,5 @@ app.use(VueBookComponents)
 app.use(ToastInstall)
 app.use(DropdownPopperSubplugin)
 app.use(router)
-
-app.use(ContextPlugin, getContext())
 
 app.mount('#app')
