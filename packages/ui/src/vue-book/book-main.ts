@@ -3,7 +3,6 @@ import App from './BookApp.vue'
 import GlobalConfigPlugin, { useGlobalConfig } from '../services/GlobalConfigPlugin'
 import { useTheme, DEFAULT_THEME } from '../services/Theme'
 import { getDefaultConfig } from '../components/vuestic-components/va-config/config-default'
-// import { ColorThemePlugin } from '../services/ColorThemePlugin'
 import DropdownPopperSubplugin from '../components/vuestic-components/va-dropdown/dropdown-popover-subplugin'
 // import ColorHelpersPlugin from '../components/vuestic-utilities/color-helpers-plugin'
 import ToastInstall from '../components/vuestic-components/va-toast/install'
@@ -32,7 +31,6 @@ const router = createRouter({
 })
 
 // app.use(ColorHelpersPlugin)
-// app.use(ColorThemePlugin)
 app.use(VueBookComponents)
 app.use(ToastInstall)
 app.use(DropdownPopperSubplugin)
