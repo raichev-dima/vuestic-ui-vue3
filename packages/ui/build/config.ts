@@ -8,14 +8,15 @@ const { merge } = require('webpack-merge')
 const version = process.env.VERSION || require('../package.json').version
 const isProd = process.env.NODE_ENV === 'production'
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
-const VueLoaderPlugin = require('vue-loader').VueLoaderPlugin
+const { VueLoaderPlugin } = require('vue-loader')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const path = require('path')
 
 require('dotenv').config()
 
-const result = {
+const config = {
   mode: 'production',
+  devtool: 'source-map',
   entry: {
     app: './src/main.ts',
   },
@@ -138,11 +139,15 @@ const result = {
   },
   optimization: {
     minimizer: [
-      // new TerserPlugin({
-      //   cache: true,
-      //   parallel: true,
-      //   sourceMap: true,
-      // }),
+      new TerserPlugin({
+        parallel: true,
+        cache: true,
+        sourceMap: true,
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true,
+        },
+      }),
       new OptimizeCssAssetsPlugin({
         assetNameRegExp: /\.css$/g,
         cssProcessor: require('cssnano'),
@@ -174,6 +179,6 @@ Object.defineProperty(RegExp.prototype, 'toJSON', {
   value: RegExp.prototype.toString,
 })
 
-console.log('result', JSON.stringify(result, null, 2))
+console.log('config', JSON.stringify(config, null, 2))
 
-module.exports = result
+module.exports = config
