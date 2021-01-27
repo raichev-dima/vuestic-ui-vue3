@@ -12,6 +12,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 console.log(`Version: ${VERSION}, ${TIMESTAMP}, commit: ${COMMIT}`)
 
+// @ts-ignore
 const app = createApp(App)
 
 const routes = [
